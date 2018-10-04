@@ -2,19 +2,19 @@
 title: 포함 파일
 description: 포함 파일
 services: functions
-author: tdykstra
+author: ggailey777
 manager: jeconnoc
 ms.service: multiple
 ms.topic: include
 ms.date: 06/21/2018
-ms.author: tdykstra
+ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 7e51d3cd0533b4fb64d7dfa783af55266d536f54
-ms.sourcegitcommit: e721422a57e6deb95245135fd9f4f5677c344d93
+ms.openlocfilehash: f51b864cab14273c1e88dd85d22400e0e76ef770
+ms.sourcegitcommit: 81587470a181e314242c7a97cd0f91c82d4fe232
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/26/2018
-ms.locfileid: "40079493"
+ms.lasthandoff: 10/01/2018
+ms.locfileid: "47460004"
 ---
 이 시점에서 응용 프로그램은 이미지를 업로드하고 볼 수 있는 기능 갤러리입니다. 이 모듈에서는 Microsoft Cognitive Services에서 Computer Vision API를 사용하여 업로드된 이미지에 대한 캡션을 생성하고 Cosmos DB에서 이미지 메타데이터를 포함한 캡션을 저장하는 방법을 알아봅니다.
 
