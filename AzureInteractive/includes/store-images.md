@@ -2,19 +2,19 @@
 title: 포함 파일
 description: 포함 파일
 services: functions
-author: tdykstra
+author: ggailey777
 manager: jeconnoc
 ms.service: multiple
 ms.topic: include
 ms.date: 06/21/2018
-ms.author: tdykstra
+ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 2202cdebe77668972372983a0e802d00edabf6dd
-ms.sourcegitcommit: e721422a57e6deb95245135fd9f4f5677c344d93
+ms.openlocfilehash: 194a25dbf9abda80379aa5aab408ac4ffe9ab7f5
+ms.sourcegitcommit: 81587470a181e314242c7a97cd0f91c82d4fe232
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/26/2018
-ms.locfileid: "40079467"
+ms.lasthandoff: 10/01/2018
+ms.locfileid: "47460061"
 ---
 Azure Cosmos DB는 서버를 사용하지 않는 전 세계에 배포된 Microsoft의 멀티모델 데이터베이스입니다. 이 모듈에서는 Azure Functions를 사용하여 Cosmos DB에서 JSON 문서로 이미지 메타데이터를 저장하고 검색하는 방법을 알아봅니다.
 
