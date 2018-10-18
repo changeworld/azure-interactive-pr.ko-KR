@@ -6,290 +6,290 @@ author: ggailey777
 manager: jeconnoc
 ms.service: multiple
 ms.topic: include
-ms.date: 06/21/2018
+ms.date: 10/12/2018
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 51c7d3e64424d499b473f3b138ce249a9cfd0182
-ms.sourcegitcommit: 81587470a181e314242c7a97cd0f91c82d4fe232
+ms.openlocfilehash: 3779c2e130afa7ee8d5879f30a924e258b7a41e9
+ms.sourcegitcommit: fdb43556b8dcf67cb39c18e532b5fab7ac53eaee
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/01/2018
-ms.locfileid: "47460090"
+ms.lasthandoff: 10/15/2018
+ms.locfileid: "49315979"
 ---
-<span data-ttu-id="216d0-103">빌드 중인 응용 프로그램은 사진 갤러리입니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-103">The application that you're building is a photo gallery.</span></span> <span data-ttu-id="216d0-104">API를 호출하는 클라이언트 쪽 JavaScript를 사용하여 이미지를 업로드하고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-104">It uses client-side JavaScript to call APIs to upload and display images.</span></span> <span data-ttu-id="216d0-105">이 모듈에서 이미지를 업로드하려면 시간이 제한된 URL을 생성하는 서버를 사용하지 않는 함수를 사용하여 API를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-105">In this module, you create an API using a serverless function that generates a time-limited URL to upload an image.</span></span> <span data-ttu-id="216d0-106">웹 응용 프로그램은 [Blob Storage REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)를 사용하여 Blob Storage에 이미지를 업로드하기 위해 생성된 URL을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-106">The web application uses the generated URL to upload an image to Blob storage using the [Blob storage REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api).</span></span>
+<span data-ttu-id="27833-103">빌드 중인 응용 프로그램은 사진 갤러리입니다.</span><span class="sxs-lookup"><span data-stu-id="27833-103">The application that you're building is a photo gallery.</span></span> <span data-ttu-id="27833-104">API를 호출하는 클라이언트 쪽 JavaScript를 사용하여 이미지를 업로드하고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-104">It uses client-side JavaScript to call APIs to upload and display images.</span></span> <span data-ttu-id="27833-105">이 모듈에서 이미지를 업로드하려면 시간이 제한된 URL을 생성하는 서버를 사용하지 않는 함수를 사용하여 API를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-105">In this module, you create an API using a serverless function that generates a time-limited URL to upload an image.</span></span> <span data-ttu-id="27833-106">웹 응용 프로그램은 [Blob Storage REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)를 사용하여 Blob Storage에 이미지를 업로드하기 위해 생성된 URL을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-106">The web application uses the generated URL to upload an image to Blob storage using the [Blob storage REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api).</span></span>
 
-## <a name="create-a-blob-storage-container-for-images"></a><span data-ttu-id="216d0-107">이미지에 대한 Blob Storage 컨테이너 만들기</span><span class="sxs-lookup"><span data-stu-id="216d0-107">Create a blob storage container for images</span></span>
+## <a name="create-a-blob-storage-container-for-images"></a><span data-ttu-id="27833-107">이미지에 대한 Blob Storage 컨테이너 만들기</span><span class="sxs-lookup"><span data-stu-id="27833-107">Create a blob storage container for images</span></span>
 
-<span data-ttu-id="216d0-108">이미지를 업로드하고 호스트하기 위해 응용 프로그램에는 별도 저장소 컨테이너가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-108">The application requires a separate storage container to upload and host images.</span></span>
+<span data-ttu-id="27833-108">이미지를 업로드하고 호스트하기 위해 응용 프로그램에는 별도 저장소 컨테이너가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-108">The application requires a separate storage container to upload and host images.</span></span>
 
-1. <span data-ttu-id="216d0-109">Cloud Shell(bash)에 로그인했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-109">Ensure you are still signed in to the Cloud Shell (bash).</span></span> <span data-ttu-id="216d0-110">그렇지 않은 경우 **포커스 모드로 전환**을 선택하여 Cloud Shell 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-110">If not, select **Enter focus mode** to open a Cloud Shell window.</span></span>
+1. <span data-ttu-id="27833-109">Cloud Shell(bash)에 로그인했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-109">Ensure you are still signed in to the Cloud Shell (bash).</span></span> <span data-ttu-id="27833-110">그렇지 않은 경우 **포커스 모드로 전환**을 선택하여 Cloud Shell 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="27833-110">If not, select **Enter focus mode** to open a Cloud Shell window.</span></span>
 
-1.  <span data-ttu-id="216d0-111">모든 Blob에 대한 공용 액세스 권한이 있는 저장소 계정에서 **images**라는 새 컨테이너를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-111">Create a new container named **images** in your storage account with public access to all blobs.</span></span>
+1.  <span data-ttu-id="27833-111">모든 Blob에 대한 공용 액세스 권한이 있는 저장소 계정에서 **images**라는 새 컨테이너를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-111">Create a new container named **images** in your storage account with public access to all blobs.</span></span>
 
     ```azurecli
     az storage container create -n images --account-name <storage account name> --public-access blob
     ```
 
-## <a name="create-an-azure-function-app"></a><span data-ttu-id="216d0-112">Azure Function 앱 만들기</span><span class="sxs-lookup"><span data-stu-id="216d0-112">Create an Azure Function app</span></span>
+## <a name="create-an-azure-function-app"></a><span data-ttu-id="27833-112">Azure Function 앱 만들기</span><span class="sxs-lookup"><span data-stu-id="27833-112">Create an Azure Function app</span></span>
 
-<span data-ttu-id="216d0-113">Azure Functions는 서버를 사용하지 않는 함수를 실행하기 위한 서비스입니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-113">Azure Functions is a service for running serverless functions.</span></span> <span data-ttu-id="216d0-114">HTTP 요청과 같은 이벤트에 의해 또는 저장소 컨테이너에서 Blob을 만들 때 서버를 사용하지 않는 함수를 트리거(호출)할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-114">A serverless function can be triggered (called) by events such as an HTTP request or when a blob is created in a storage container.</span></span>
+<span data-ttu-id="27833-113">Azure Functions는 서버를 사용하지 않는 함수를 실행하기 위한 서비스입니다.</span><span class="sxs-lookup"><span data-stu-id="27833-113">Azure Functions is a service for running serverless functions.</span></span> <span data-ttu-id="27833-114">HTTP 요청과 같은 이벤트에 의해 또는 저장소 컨테이너에서 Blob을 만들 때 서버를 사용하지 않는 함수를 트리거(호출)할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-114">A serverless function can be triggered (called) by events such as an HTTP request or when a blob is created in a storage container.</span></span>
 
-<span data-ttu-id="216d0-115">Azure 함수 앱은 하나 이상의 서버를 사용하지 않는 함수에 대한 컨테이너입니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-115">An Azure Function app is a container for one or more serverless functions.</span></span>
+<span data-ttu-id="27833-115">Azure 함수 앱은 하나 이상의 서버를 사용하지 않는 함수에 대한 컨테이너입니다.</span><span class="sxs-lookup"><span data-stu-id="27833-115">An Azure Function app is a container for one or more serverless functions.</span></span>
 
-<span data-ttu-id="216d0-116">**first-serverless-app**이라는 이전에 만든 리소스 그룹에서 고유한 이름의 새 Azure 함수 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-116">Create a new Azure Function app with a unique name in the resource group you created earlier named **first-serverless-app**.</span></span> <span data-ttu-id="216d0-117">함수 앱에는 Storage 계정이 필요합니다. 이 자습서에서는 기존 Storage 계정을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-117">Function apps require a Storage account; in this tutorial, you use the existing storage account.</span></span>
+<span data-ttu-id="27833-116">**first-serverless-app**이라는 이전에 만든 리소스 그룹에서 고유한 이름의 새 Azure 함수 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-116">Create a new Azure Function app with a unique name in the resource group you created earlier named **first-serverless-app**.</span></span> <span data-ttu-id="27833-117">함수 앱에는 Storage 계정이 필요합니다. 이 자습서에서는 기존 Storage 계정을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-117">Function apps require a Storage account; in this tutorial, you use the existing storage account.</span></span>
 
 ```azurecli
 az functionapp create -n <function app name> -g first-serverless-app -s <storage account name> -c westcentralus
 ```
 
-## <a name="configure-the-function-app"></a><span data-ttu-id="216d0-118">함수 앱 구성</span><span class="sxs-lookup"><span data-stu-id="216d0-118">Configure the function app</span></span>
+## <a name="configure-the-function-app"></a><span data-ttu-id="27833-118">함수 앱 구성</span><span class="sxs-lookup"><span data-stu-id="27833-118">Configure the function app</span></span>
 
-<span data-ttu-id="216d0-119">이 자습서의 함수 앱에는 Functions 런타임의 버전 1.x가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-119">The function app in this tutorial requires version 1.x of the Functions runtime.</span></span> <span data-ttu-id="216d0-120">`FUNCTIONS_WORKER_RUNTIME` 응용 프로그램 설정을 `~1`로 설정하면 함수 앱이 최신 1.x 버전에 고정됩니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-120">Setting the `FUNCTIONS_WORKER_RUNTIME` application setting to `~1` pins the function app to the latest 1.x version.</span></span> <span data-ttu-id="216d0-121">[az functionapp config appsettings set](https://docs.microsoft.com/cli/azure/functionapp/config/appsettings#set) 명령을 사용하여 응용 프로그램 설정을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-121">Set application settings with the [az functionapp config appsettings set](https://docs.microsoft.com/cli/azure/functionapp/config/appsettings#set) command.</span></span>
+<span data-ttu-id="27833-119">이 자습서의 함수 앱에는 Functions 런타임의 버전 1.x가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-119">The function app in this tutorial requires version 1.x of the Functions runtime.</span></span> <span data-ttu-id="27833-120">`FUNCTIONS_EXTENSION_VERSION` 응용 프로그램 설정을 `~1`로 설정하면 함수 앱이 최신 1.x 버전에 고정됩니다.</span><span class="sxs-lookup"><span data-stu-id="27833-120">Setting the `FUNCTIONS_EXTENSION_VERSION` application setting to `~1` pins the function app to the latest 1.x version.</span></span> <span data-ttu-id="27833-121">[az functionapp config appsettings set](https://docs.microsoft.com/cli/azure/functionapp/config/appsettings#set) 명령을 사용하여 응용 프로그램 설정을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-121">Set application settings with the [az functionapp config appsettings set](https://docs.microsoft.com/cli/azure/functionapp/config/appsettings#set) command.</span></span>
 
-<span data-ttu-id="216d0-122">다음 Azure CLI 명령에서 \`<app_name>은 함수 앱의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-122">In the following Azure CLI command, \`<app_name> is the name of your function app.</span></span>
+<span data-ttu-id="27833-122">다음 Azure CLI 명령에서 \`<app_name>은 함수 앱의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="27833-122">In the following Azure CLI command, \`<app_name> is the name of your function app.</span></span>
 
 ```azurecli
-az functionapp config appsettings set --name <function app name> --g first-serverless-app --settings FUNCTIONS_WORKER_RUNTIME=~1
+az functionapp config appsettings set --name <function app name> --g first-serverless-app --settings FUNCTIONS_EXTENSION_VERSION=~1
 ```
 
-## <a name="create-an-http-triggered-serverless-function"></a><span data-ttu-id="216d0-123">HTTP 트리거 서버를 사용하지 않는 함수 만들기</span><span class="sxs-lookup"><span data-stu-id="216d0-123">Create an HTTP-triggered serverless function</span></span>
+## <a name="create-an-http-triggered-serverless-function"></a><span data-ttu-id="27833-123">HTTP 트리거 서버를 사용하지 않는 함수 만들기</span><span class="sxs-lookup"><span data-stu-id="27833-123">Create an HTTP-triggered serverless function</span></span>
 
-<span data-ttu-id="216d0-124">사진 갤러리 웹 응용 프로그램을 통해 서버를 사용하지 않는 함수에 HTTP를 요청하여 Blob Storage에 이미지를 안전하게 업로드하기 위해 시간이 제한된 URL을 생성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-124">The photo gallery web application makes an HTTP request to serverless function to generate a time-limited URL to securely upload an image to Blob storage.</span></span> <span data-ttu-id="216d0-125">이 함수는 HTTP 요청에 의해 트리거되고 Azure Storage SDK를 사용하여 보안 URL을 생성하고 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-125">The function is triggered by an HTTP request and uses the Azure Storage SDK to generate and return the secure URL.</span></span>
+<span data-ttu-id="27833-124">사진 갤러리 웹 응용 프로그램을 통해 서버를 사용하지 않는 함수에 HTTP를 요청하여 Blob Storage에 이미지를 안전하게 업로드하기 위해 시간이 제한된 URL을 생성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-124">The photo gallery web application makes an HTTP request to serverless function to generate a time-limited URL to securely upload an image to Blob storage.</span></span> <span data-ttu-id="27833-125">이 함수는 HTTP 요청에 의해 트리거되고 Azure Storage SDK를 사용하여 보안 URL을 생성하고 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-125">The function is triggered by an HTTP request and uses the Azure Storage SDK to generate and return the secure URL.</span></span>
 
-1. <span data-ttu-id="216d0-126">함수 앱을 만든 후에 검색 상자를 사용하여 Azure Portal에서 검색하고 클릭하여 엽니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-126">After the Function app is created, search for it in the Azure Portal using the Search box and click to open it.</span></span>
+1. <span data-ttu-id="27833-126">함수 앱을 만든 후에 검색 상자를 사용하여 Azure Portal에서 검색하고 클릭하여 엽니다.</span><span class="sxs-lookup"><span data-stu-id="27833-126">After the Function app is created, search for it in the Azure Portal using the Search box and click to open it.</span></span>
 
     ![함수 앱 열기](media/functions-first-serverless-web-app/2-search-function-app.png)
 
-1. <span data-ttu-id="216d0-128">함수 앱 창의 왼쪽 탐색에서 **함수** 위로 마우스를 가져가고, **+** 를 클릭하여 새로운 서버를 사용하지 않는 함수를 만들기 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-128">In the function app window's left hand navigation, hover over **Functions** and click **+** to start creating a new serverless function.</span></span>
+1. <span data-ttu-id="27833-128">함수 앱 창의 왼쪽 탐색에서 **함수** 위로 마우스를 가져가고, **+** 를 클릭하여 새로운 서버를 사용하지 않는 함수를 만들기 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-128">In the function app window's left hand navigation, hover over **Functions** and click **+** to start creating a new serverless function.</span></span>
 
     ![새 함수 만들기](media/functions-first-serverless-web-app/2-new-function.png)
 
-1. <span data-ttu-id="216d0-130">**사용자 지정 함수**를 클릭하여 함수 템플릿 목록을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-130">Click **Custom function** to see a list of function templates.</span></span>
+1. <span data-ttu-id="27833-130">**사용자 지정 함수**를 클릭하여 함수 템플릿 목록을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-130">Click **Custom function** to see a list of function templates.</span></span>
 
-1. <span data-ttu-id="216d0-131">**HttpTrigger** 템플릿을 찾고 사용할 언어를 클릭합니다(C# 또는 JavaScript).</span><span class="sxs-lookup"><span data-stu-id="216d0-131">Find the **HttpTrigger** template and click the language to use (C# or JavaScript).</span></span>
+1. <span data-ttu-id="27833-131">**HttpTrigger** 템플릿을 찾고 사용할 언어를 클릭합니다(C# 또는 JavaScript).</span><span class="sxs-lookup"><span data-stu-id="27833-131">Find the **HttpTrigger** template and click the language to use (C# or JavaScript).</span></span>
 
-1. <span data-ttu-id="216d0-132">이러한 값을 사용하여 Blob 업로드 URL을 생성하는 함수를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-132">Use these values to create a function that generates a blob upload URL.</span></span>
+1. <span data-ttu-id="27833-132">이러한 값을 사용하여 Blob 업로드 URL을 생성하는 함수를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-132">Use these values to create a function that generates a blob upload URL.</span></span>
 
-    | <span data-ttu-id="216d0-133">설정</span><span class="sxs-lookup"><span data-stu-id="216d0-133">Setting</span></span>      |  <span data-ttu-id="216d0-134">제안 값</span><span class="sxs-lookup"><span data-stu-id="216d0-134">Suggested value</span></span>   | <span data-ttu-id="216d0-135">설명</span><span class="sxs-lookup"><span data-stu-id="216d0-135">Description</span></span>                                        |
+    | <span data-ttu-id="27833-133">설정</span><span class="sxs-lookup"><span data-stu-id="27833-133">Setting</span></span>      |  <span data-ttu-id="27833-134">제안 값</span><span class="sxs-lookup"><span data-stu-id="27833-134">Suggested value</span></span>   | <span data-ttu-id="27833-135">설명</span><span class="sxs-lookup"><span data-stu-id="27833-135">Description</span></span>                                        |
     | --- | --- | ---|
-    | <span data-ttu-id="216d0-136">**언어**</span><span class="sxs-lookup"><span data-stu-id="216d0-136">**Language**</span></span> | <span data-ttu-id="216d0-137">C# 또는 JavaScript</span><span class="sxs-lookup"><span data-stu-id="216d0-137">C# or JavaScript</span></span> | <span data-ttu-id="216d0-138">사용할 언어를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-138">Select the language you want to use.</span></span> |
-    | <span data-ttu-id="216d0-139">**함수 이름 지정**</span><span class="sxs-lookup"><span data-stu-id="216d0-139">**Name your function**</span></span> | <span data-ttu-id="216d0-140">GetUploadUrl</span><span class="sxs-lookup"><span data-stu-id="216d0-140">GetUploadUrl</span></span> | <span data-ttu-id="216d0-141">응용 프로그램이 함수를 검색할 수 있도록 표시된 대로 이 이름을 정확히 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-141">Type this name exactly as shown so the application can discover the function.</span></span> |
-    | <span data-ttu-id="216d0-142">**권한 부여 수준**</span><span class="sxs-lookup"><span data-stu-id="216d0-142">**Authorization level**</span></span> | <span data-ttu-id="216d0-143">익명</span><span class="sxs-lookup"><span data-stu-id="216d0-143">Anonymous</span></span> | <span data-ttu-id="216d0-144">함수가 공개적으로 액세스될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-144">Allow the function to be accessed publicly.</span></span> |
+    | <span data-ttu-id="27833-136">**언어**</span><span class="sxs-lookup"><span data-stu-id="27833-136">**Language**</span></span> | <span data-ttu-id="27833-137">C# 또는 JavaScript</span><span class="sxs-lookup"><span data-stu-id="27833-137">C# or JavaScript</span></span> | <span data-ttu-id="27833-138">사용할 언어를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-138">Select the language you want to use.</span></span> |
+    | <span data-ttu-id="27833-139">**함수 이름 지정**</span><span class="sxs-lookup"><span data-stu-id="27833-139">**Name your function**</span></span> | <span data-ttu-id="27833-140">GetUploadUrl</span><span class="sxs-lookup"><span data-stu-id="27833-140">GetUploadUrl</span></span> | <span data-ttu-id="27833-141">응용 프로그램이 함수를 검색할 수 있도록 표시된 대로 이 이름을 정확히 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-141">Type this name exactly as shown so the application can discover the function.</span></span> |
+    | <span data-ttu-id="27833-142">**권한 부여 수준**</span><span class="sxs-lookup"><span data-stu-id="27833-142">**Authorization level**</span></span> | <span data-ttu-id="27833-143">익명</span><span class="sxs-lookup"><span data-stu-id="27833-143">Anonymous</span></span> | <span data-ttu-id="27833-144">함수가 공개적으로 액세스될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-144">Allow the function to be accessed publicly.</span></span> |
 
     ![새 HTTP 트리거 함수에 대한 설정을 입력합니다.](media/functions-first-serverless-web-app/2-new-function-httptrigger.png)
 
-1. <span data-ttu-id="216d0-146">**만들기**를 클릭하여 함수를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-146">Click **Create** to create the function.</span></span>
+1. <span data-ttu-id="27833-146">**만들기**를 클릭하여 함수를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-146">Click **Create** to create the function.</span></span>
 
-1. <span data-ttu-id="216d0-147">**C#**</span><span class="sxs-lookup"><span data-stu-id="216d0-147">**C#**</span></span> 
+1. <span data-ttu-id="27833-147">**C#**</span><span class="sxs-lookup"><span data-stu-id="27833-147">**C#**</span></span> 
 
-    1. <span data-ttu-id="216d0-148">함수의 소스 코드가 표시되면 모든 **run.csx**를 [**csharp/GetUploadUrl/run.csx**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/csharp/GetUploadUrl/run.csx)의 콘텐츠로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-148">When the function's source code appears, replace all of **run.csx** with the content of [**csharp/GetUploadUrl/run.csx**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/csharp/GetUploadUrl/run.csx).</span></span>
+    1. <span data-ttu-id="27833-148">함수의 소스 코드가 표시되면 모든 **run.csx**를 [**csharp/GetUploadUrl/run.csx**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/csharp/GetUploadUrl/run.csx)의 콘텐츠로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="27833-148">When the function's source code appears, replace all of **run.csx** with the content of [**csharp/GetUploadUrl/run.csx**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/csharp/GetUploadUrl/run.csx).</span></span>
 
-1. <span data-ttu-id="216d0-149">**JavaScript**</span><span class="sxs-lookup"><span data-stu-id="216d0-149">**JavaScript**</span></span> 
+1. <span data-ttu-id="27833-149">**JavaScript**</span><span class="sxs-lookup"><span data-stu-id="27833-149">**JavaScript**</span></span> 
 
-    1. <span data-ttu-id="216d0-150">(JavaScript) 보안 URL을 빌드하는 데 필요한 SAS(공유 액세스 서명) 토큰을 생성하기 위해 이 함수에는 npm의 `azure-storage` 패키지가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-150">(JavaScript) This function requires the `azure-storage` package from npm to generate the shared access signature (SAS) token required to build the secure URL.</span></span> <span data-ttu-id="216d0-151">npm 패키지를 설치하려면 왼쪽 탐색 창에서 함수 앱의 이름을 클릭하고, **플랫폼 기능**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-151">To install the npm package, click on the Function App's name on the left navigation and click **Platform features**.</span></span>
+    1. <span data-ttu-id="27833-150">(JavaScript) 보안 URL을 빌드하는 데 필요한 SAS(공유 액세스 서명) 토큰을 생성하기 위해 이 함수에는 npm의 `azure-storage` 패키지가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-150">(JavaScript) This function requires the `azure-storage` package from npm to generate the shared access signature (SAS) token required to build the secure URL.</span></span> <span data-ttu-id="27833-151">npm 패키지를 설치하려면 왼쪽 탐색 창에서 함수 앱의 이름을 클릭하고, **플랫폼 기능**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-151">To install the npm package, click on the Function App's name on the left navigation and click **Platform features**.</span></span>
 
-    1. <span data-ttu-id="216d0-152">(JavaScript) **콘솔**을 클릭하여 콘솔 창을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-152">(JavaScript) Click **Console** to reveal a console window.</span></span>
+    1. <span data-ttu-id="27833-152">(JavaScript) **콘솔**을 클릭하여 콘솔 창을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-152">(JavaScript) Click **Console** to reveal a console window.</span></span>
 
         ![콘솔 창을 엽니다.](media/functions-first-serverless-web-app/2-open-console.jpg)
 
-    1. <span data-ttu-id="216d0-154">(JavaScript) `cd d:\home\site\wwwroot` 명령을 실행하여 현재 디렉터리가 **d:\home\site\wwwroot**인지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-154">(JavaScript) Ensure the current directory is **d:\home\site\wwwroot** by running the command `cd d:\home\site\wwwroot`.</span></span>
+    1. <span data-ttu-id="27833-154">(JavaScript) `cd d:\home\site\wwwroot` 명령을 실행하여 현재 디렉터리가 **d:\home\site\wwwroot**인지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-154">(JavaScript) Ensure the current directory is **d:\home\site\wwwroot** by running the command `cd d:\home\site\wwwroot`.</span></span>
 
-    1. <span data-ttu-id="216d0-155">(JavaScript) `npm init -y` 명령을 실행하여 빈 **package.json** 파일을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-155">(JavaScript) Run the command `npm init -y` to create an empty **package.json** file.</span></span>
+    1. <span data-ttu-id="27833-155">(JavaScript) `npm init -y` 명령을 실행하여 빈 **package.json** 파일을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-155">(JavaScript) Run the command `npm init -y` to create an empty **package.json** file.</span></span>
 
-    1. <span data-ttu-id="216d0-156">(JavaScript) 콘솔에서 `npm install --save azure-storage` 명령을 실행하여 패키지를 설치하고 **package.json**에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-156">(JavaScript) Run the command `npm install --save azure-storage` in the console to install the package and save it in **package.json**.</span></span> <span data-ttu-id="216d0-157">작업을 완료하는 데 일이 분 정도 걸릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-157">It may take a minute or two to complete the operation.</span></span>
+    1. <span data-ttu-id="27833-156">(JavaScript) 콘솔에서 `npm install --save azure-storage` 명령을 실행하여 패키지를 설치하고 **package.json**에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-156">(JavaScript) Run the command `npm install --save azure-storage` in the console to install the package and save it in **package.json**.</span></span> <span data-ttu-id="27833-157">작업을 완료하는 데 일이 분 정도 걸릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-157">It may take a minute or two to complete the operation.</span></span>
 
-    1. <span data-ttu-id="216d0-158">(JavaScript) 왼쪽 탐색 창에서 함수 이름(**GetUploadUrl**)을 클릭하여 함수를 표시하고, 모든 **index.js**를 [**javascript/GetUploadUrl/index.js**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/javascript/GetUploadUrl/index.js)의 콘텐츠로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-158">(JavaScript) Click on the function name (**GetUploadUrl**) in the left navigation to reveal the function, replace all of **index.js** with the content of [**javascript/GetUploadUrl/index.js**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/javascript/GetUploadUrl/index.js).</span></span>
+    1. <span data-ttu-id="27833-158">(JavaScript) 왼쪽 탐색 창에서 함수 이름(**GetUploadUrl**)을 클릭하여 함수를 표시하고, 모든 **index.js**를 [**javascript/GetUploadUrl/index.js**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/javascript/GetUploadUrl/index.js)의 콘텐츠로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="27833-158">(JavaScript) Click on the function name (**GetUploadUrl**) in the left navigation to reveal the function, replace all of **index.js** with the content of [**javascript/GetUploadUrl/index.js**](https://raw.githubusercontent.com/Azure-Samples/functions-first-serverless-web-application/master/javascript/GetUploadUrl/index.js).</span></span>
     
         ![업데이트 후 index.js](media/functions-first-serverless-web-app/2-paste-js.jpg)
 
-1. <span data-ttu-id="216d0-160">코드 창 아래에서 **로그**를 클릭하여 로그 패널을 확장합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-160">Click **Logs** below the code window to expand the logs panel.</span></span>
+1. <span data-ttu-id="27833-160">코드 창 아래에서 **로그**를 클릭하여 로그 패널을 확장합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-160">Click **Logs** below the code window to expand the logs panel.</span></span>
 
-1. <span data-ttu-id="216d0-161">**저장**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-161">Click **Save**.</span></span> <span data-ttu-id="216d0-162">로그 패널을 확인하여 함수가 성공적으로 컴파일되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-162">Check the logs panel to ensure the function is successfully compiled.</span></span>
+1. <span data-ttu-id="27833-161">**저장**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-161">Click **Save**.</span></span> <span data-ttu-id="27833-162">로그 패널을 확인하여 함수가 성공적으로 컴파일되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-162">Check the logs panel to ensure the function is successfully compiled.</span></span>
 
-<span data-ttu-id="216d0-163">함수는 Blob Storage에 파일을 업로드하는 데 사용되는 SAS(공유 액세스 서명) URL이라는 항목을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-163">The function generates what is called a shared access signature (SAS) URL that is used to upload a file to Blob storage.</span></span> <span data-ttu-id="216d0-164">SAS URL은 단기간 동안 유효하고 단일 파일만을 업로드하도록 허용합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-164">The SAS URL is valid for a short period of time and only allows a single file to be uploaded.</span></span> <span data-ttu-id="216d0-165">[공유 액세스 서명을 사용하는 방법](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1)에 대한 자세한 정보는 Blob Storage 설명서를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="216d0-165">Consult the Blob storage documentation for more information on [using shared access signatures](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1).</span></span>
+<span data-ttu-id="27833-163">함수는 Blob Storage에 파일을 업로드하는 데 사용되는 SAS(공유 액세스 서명) URL이라는 항목을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-163">The function generates what is called a shared access signature (SAS) URL that is used to upload a file to Blob storage.</span></span> <span data-ttu-id="27833-164">SAS URL은 단기간 동안 유효하고 단일 파일만을 업로드하도록 허용합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-164">The SAS URL is valid for a short period of time and only allows a single file to be uploaded.</span></span> <span data-ttu-id="27833-165">[공유 액세스 서명을 사용하는 방법](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1)에 대한 자세한 정보는 Blob Storage 설명서를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="27833-165">Consult the Blob storage documentation for more information on [using shared access signatures](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1).</span></span>
 
 
-## <a name="add-an-environment-variable-for-the-storage-connection-string"></a><span data-ttu-id="216d0-166">저장소 연결 문자열에 대한 환경 변수 추가</span><span class="sxs-lookup"><span data-stu-id="216d0-166">Add an environment variable for the storage connection string</span></span>
+## <a name="add-an-environment-variable-for-the-storage-connection-string"></a><span data-ttu-id="27833-166">저장소 연결 문자열에 대한 환경 변수 추가</span><span class="sxs-lookup"><span data-stu-id="27833-166">Add an environment variable for the storage connection string</span></span>
 
-<span data-ttu-id="216d0-167">SAS URL을 생성할 수 있도록 방금 만든 함수에는 Storage 계정에 대한 연결 문자열이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-167">The function you just created requires a connection string for the Storage account so that it can generate the SAS URL.</span></span> <span data-ttu-id="216d0-168">함수의 본문에서 연결 문자열을 하드코딩하는 대신 응용 프로그램 설정으로 저장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-168">Instead of hardcoding the connection string in the function's body, it can be stored as an application setting.</span></span> <span data-ttu-id="216d0-169">함수 앱의 모든 함수에서 환경 변수로 응용 프로그램 설정에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-169">Application settings are accessible as environment variables by all functions in the Function app.</span></span>
+<span data-ttu-id="27833-167">SAS URL을 생성할 수 있도록 방금 만든 함수에는 Storage 계정에 대한 연결 문자열이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-167">The function you just created requires a connection string for the Storage account so that it can generate the SAS URL.</span></span> <span data-ttu-id="27833-168">함수의 본문에서 연결 문자열을 하드코딩하는 대신 응용 프로그램 설정으로 저장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-168">Instead of hardcoding the connection string in the function's body, it can be stored as an application setting.</span></span> <span data-ttu-id="27833-169">함수 앱의 모든 함수에서 환경 변수로 응용 프로그램 설정에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-169">Application settings are accessible as environment variables by all functions in the Function app.</span></span>
 
-1. <span data-ttu-id="216d0-170">Cloud Shell에서 Storage 계정 연결 문자열을 쿼리하고 **STORAGE_CONNECTION_STRING**이라는 bash 변수에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-170">In the Cloud Shell, query the Storage account connection string and save it to a bash variable named **STORAGE_CONNECTION_STRING**.</span></span>
+1. <span data-ttu-id="27833-170">Cloud Shell에서 Storage 계정 연결 문자열을 쿼리하고 **STORAGE_CONNECTION_STRING**이라는 bash 변수에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-170">In the Cloud Shell, query the Storage account connection string and save it to a bash variable named **STORAGE_CONNECTION_STRING**.</span></span>
 
     ```azurecli
     export STORAGE_CONNECTION_STRING=$(az storage account show-connection-string -n <storage account name> -g first-serverless-app --query "connectionString" --output tsv)
     ```
 
-    <span data-ttu-id="216d0-171">변수를 성공적으로 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-171">Confirm the variable is set successfully.</span></span>
+    <span data-ttu-id="27833-171">변수를 성공적으로 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-171">Confirm the variable is set successfully.</span></span>
 
     ```azurecli
     echo $STORAGE_CONNECTION_STRING
     ```
 
-1. <span data-ttu-id="216d0-172">이전 단계에서 저장된 값을 사용하여 **AZURE_STORAGE_CONNECTION_STRING**이라는 새 응용 프로그램 설정을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-172">Create a new application setting named **AZURE_STORAGE_CONNECTION_STRING** using the value saved from the previous step.</span></span>
+1. <span data-ttu-id="27833-172">이전 단계에서 저장된 값을 사용하여 **AZURE_STORAGE_CONNECTION_STRING**이라는 새 응용 프로그램 설정을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="27833-172">Create a new application setting named **AZURE_STORAGE_CONNECTION_STRING** using the value saved from the previous step.</span></span>
 
     ```azurecli
     az functionapp config appsettings set -n <function app name> -g first-serverless-app --settings AZURE_STORAGE_CONNECTION_STRING=$STORAGE_CONNECTION_STRING -o table
     ```
 
-    <span data-ttu-id="216d0-173">명령의 출력에 올바른 값을 가진 새 응용 프로그램 설정이 포함되는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-173">Confirm that the command's output contains the new application setting with the correct value.</span></span>
+    <span data-ttu-id="27833-173">명령의 출력에 올바른 값을 가진 새 응용 프로그램 설정이 포함되는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-173">Confirm that the command's output contains the new application setting with the correct value.</span></span>
 
 
-## <a name="test-the-serverless-function"></a><span data-ttu-id="216d0-174">서버를 사용하지 않는 함수 테스트</span><span class="sxs-lookup"><span data-stu-id="216d0-174">Test the serverless function</span></span>
+## <a name="test-the-serverless-function"></a><span data-ttu-id="27833-174">서버를 사용하지 않는 함수 테스트</span><span class="sxs-lookup"><span data-stu-id="27833-174">Test the serverless function</span></span>
 
-<span data-ttu-id="216d0-175">함수를 만들고 편집하는 것 외에도 Azure Portal에서는 함수를 테스트하기 위한 기본 제공 도구를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-175">In addition to creating and editing functions, the Azure portal also provides an built-in tool for testing functions.</span></span>
+<span data-ttu-id="27833-175">함수를 만들고 편집하는 것 외에도 Azure Portal에서는 함수를 테스트하기 위한 기본 제공 도구를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-175">In addition to creating and editing functions, the Azure portal also provides an built-in tool for testing functions.</span></span>
 
-1. <span data-ttu-id="216d0-176">HTTP 서버를 사용하지 않는 함수를 테스트하려면 코드 창의 오른쪽에서 **테스트** 탭을 클릭하고 테스트 패널을 확장합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-176">To test the HTTP serverless function, click on the **Test** tab on the right of the code window to expand the test panel.</span></span>
+1. <span data-ttu-id="27833-176">HTTP 서버를 사용하지 않는 함수를 테스트하려면 코드 창의 오른쪽에서 **테스트** 탭을 클릭하고 테스트 패널을 확장합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-176">To test the HTTP serverless function, click on the **Test** tab on the right of the code window to expand the test panel.</span></span>
 
-1. <span data-ttu-id="216d0-177">**Http 메서드**를 **GET**으로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-177">Change the **Http method** to **GET**.</span></span>
+1. <span data-ttu-id="27833-177">**Http 메서드**를 **GET**으로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-177">Change the **Http method** to **GET**.</span></span>
 
-1. <span data-ttu-id="216d0-178">**쿼리** 아래에서 *매개 변수 추가*를 클릭하고 다음 매개 변수를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-178">Under **Query**, click *Add parameter*\* and add the following parameter:</span></span>
+1. <span data-ttu-id="27833-178">**쿼리** 아래에서 *매개 변수 추가*를 클릭하고 다음 매개 변수를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-178">Under **Query**, click *Add parameter*\* and add the following parameter:</span></span>
 
-    | <span data-ttu-id="216d0-179">이름</span><span class="sxs-lookup"><span data-stu-id="216d0-179">name</span></span>      |  <span data-ttu-id="216d0-180">값</span><span class="sxs-lookup"><span data-stu-id="216d0-180">value</span></span>   | 
+    | <span data-ttu-id="27833-179">이름</span><span class="sxs-lookup"><span data-stu-id="27833-179">name</span></span>      |  <span data-ttu-id="27833-180">값</span><span class="sxs-lookup"><span data-stu-id="27833-180">value</span></span>   | 
     | --- | --- |
-    | <span data-ttu-id="216d0-181">filename</span><span class="sxs-lookup"><span data-stu-id="216d0-181">filename</span></span> | <span data-ttu-id="216d0-182">image1.jpg</span><span class="sxs-lookup"><span data-stu-id="216d0-182">image1.jpg</span></span> |
+    | <span data-ttu-id="27833-181">filename</span><span class="sxs-lookup"><span data-stu-id="27833-181">filename</span></span> | <span data-ttu-id="27833-182">image1.jpg</span><span class="sxs-lookup"><span data-stu-id="27833-182">image1.jpg</span></span> |
 
-1. <span data-ttu-id="216d0-183">테스트 패널에서 **실행**을 클릭하여 함수에 HTTP 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-183">Click **Run** in the test panel to send an HTTP request to the function.</span></span>
+1. <span data-ttu-id="27833-183">테스트 패널에서 **실행**을 클릭하여 함수에 HTTP 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="27833-183">Click **Run** in the test panel to send an HTTP request to the function.</span></span>
 
-1. <span data-ttu-id="216d0-184">함수는 출력에서 업로드 URL을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-184">The function returns an upload URL in the output.</span></span> <span data-ttu-id="216d0-185">함수 실행이 로그 패널에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-185">The function execution appears in the logs panel.</span></span>
+1. <span data-ttu-id="27833-184">함수는 출력에서 업로드 URL을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-184">The function returns an upload URL in the output.</span></span> <span data-ttu-id="27833-185">함수 실행이 로그 패널에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="27833-185">The function execution appears in the logs panel.</span></span>
 
     ![함수를 보여주는 로그가 성공적으로 실행되었습니다.](media/functions-first-serverless-web-app/2-test-function.png)
 
 
-## <a name="configure-cors-in-the-function-app"></a><span data-ttu-id="216d0-187">함수 앱에서 CORS 구성</span><span class="sxs-lookup"><span data-stu-id="216d0-187">Configure CORS in the function app</span></span>
+## <a name="configure-cors-in-the-function-app"></a><span data-ttu-id="27833-187">함수 앱에서 CORS 구성</span><span class="sxs-lookup"><span data-stu-id="27833-187">Configure CORS in the function app</span></span>
 
-<span data-ttu-id="216d0-188">앱의 프런트 엔드가 Blob Storage에서 호스트되기 때문에 Azure 함수 앱과 도메인 이름이 다릅니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-188">Because the app's frontend is hosted in Blob storage, it has a different domain name than the Azure Function app.</span></span> <span data-ttu-id="216d0-189">클라이언트 쪽 JavaScript에서 성공적으로 만든 함수를 호출하려면 함수 앱은 CORS(교차 원본 리소스 공유)에 대해 구성되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-189">For the client-side JavaScript to successfully call the function you just created, the function app needs to be configured for cross-origin resource sharing (CORS).</span></span>
+<span data-ttu-id="27833-188">앱의 프런트 엔드가 Blob Storage에서 호스트되기 때문에 Azure 함수 앱과 도메인 이름이 다릅니다.</span><span class="sxs-lookup"><span data-stu-id="27833-188">Because the app's frontend is hosted in Blob storage, it has a different domain name than the Azure Function app.</span></span> <span data-ttu-id="27833-189">클라이언트 쪽 JavaScript에서 성공적으로 만든 함수를 호출하려면 함수 앱은 CORS(교차 원본 리소스 공유)에 대해 구성되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-189">For the client-side JavaScript to successfully call the function you just created, the function app needs to be configured for cross-origin resource sharing (CORS).</span></span>
 
-1. <span data-ttu-id="216d0-190">함수 앱 창의 왼쪽 탐색 모음에서 함수 앱의 이름을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-190">In the left navigation bar of the function app window, click on the name of your function app.</span></span>
+1. <span data-ttu-id="27833-190">함수 앱 창의 왼쪽 탐색 모음에서 함수 앱의 이름을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-190">In the left navigation bar of the function app window, click on the name of your function app.</span></span>
 
-1. <span data-ttu-id="216d0-191">**플랫폼 기능**을 클릭하여 고급 기능 목록을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-191">Click on **Platform features** to view a list of advanced features.</span></span>
+1. <span data-ttu-id="27833-191">**플랫폼 기능**을 클릭하여 고급 기능 목록을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-191">Click on **Platform features** to view a list of advanced features.</span></span>
 
-1. <span data-ttu-id="216d0-192">**API** 아래에서 **CORS**를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-192">Under **API**, click **CORS**.</span></span>
+1. <span data-ttu-id="27833-192">**API** 아래에서 **CORS**를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-192">Under **API**, click **CORS**.</span></span>
 
     ![CORS 선택](media/functions-first-serverless-web-app/2-open-cors.jpg)
 
-1. <span data-ttu-id="216d0-194">이전 모듈의 응용 프로그램 URL에 대해 허용 원본을 추가하여 후행 **/**(예: `https://firstserverlessweb.z4.web.core.windows.net`)를 생략합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-194">Add an allow origin for the application URL from the previous module, omitting the trailing **/** (for example: `https://firstserverlessweb.z4.web.core.windows.net`).</span></span>
+1. <span data-ttu-id="27833-194">이전 모듈의 응용 프로그램 URL에 대해 허용 원본을 추가하여 후행 **/**(예: `https://firstserverlessweb.z4.web.core.windows.net`)를 생략합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-194">Add an allow origin for the application URL from the previous module, omitting the trailing **/** (for example: `https://firstserverlessweb.z4.web.core.windows.net`).</span></span>
 
     ![서버를 사용하지 않는 웹앱 URL이 추가되었음을 보여주는 CORS 설정](media/functions-first-serverless-web-app/2-add-cors.png)
 
-1. <span data-ttu-id="216d0-196">**저장**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-196">Click **Save**.</span></span>
+1. <span data-ttu-id="27833-196">**저장**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-196">Click **Save**.</span></span>
 
-1. <span data-ttu-id="216d0-197">C#</span><span class="sxs-lookup"><span data-stu-id="216d0-197">C#</span></span>
+1. <span data-ttu-id="27833-197">C#</span><span class="sxs-lookup"><span data-stu-id="27833-197">C#</span></span>
 
-   1. <span data-ttu-id="216d0-198">(C#) `GetUploadUrl` 함수로 다시 이동한 다음, **통합** 탭을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-198">(C#) Navigate back to the `GetUploadUrl` function, and then select the **Integrate** tab.</span></span>
+   1. <span data-ttu-id="27833-198">(C#) `GetUploadUrl` 함수로 다시 이동한 다음, **통합** 탭을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-198">(C#) Navigate back to the `GetUploadUrl` function, and then select the **Integrate** tab.</span></span>
 
-   1. <span data-ttu-id="216d0-199">(C#) 선택한 HTTP 메서드 아래에서 **OPTIONS**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-199">(C#) Under Selected HTTP methods, select **OPTIONS**.</span></span>
+   1. <span data-ttu-id="27833-199">(C#) 선택한 HTTP 메서드 아래에서 **OPTIONS**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-199">(C#) Under Selected HTTP methods, select **OPTIONS**.</span></span>
 
-      <span data-ttu-id="216d0-200">**GET**, **POST** 및 **OPTIONS**을 모두 선택해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-200">**GET**, **POST**, and **OPTIONS** should all be selected.</span></span> <span data-ttu-id="216d0-201">CORS에서는 C# 함수에 기본적으로 선택되지 않은 OPTIONS 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-201">CORS uses the OPTIONS method, which is not selected by default for C# functions.</span></span>  
+      <span data-ttu-id="27833-200">**GET**, **POST** 및 **OPTIONS**을 모두 선택해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-200">**GET**, **POST**, and **OPTIONS** should all be selected.</span></span> <span data-ttu-id="27833-201">CORS에서는 C# 함수에 기본적으로 선택되지 않은 OPTIONS 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-201">CORS uses the OPTIONS method, which is not selected by default for C# functions.</span></span>  
 
-   1. <span data-ttu-id="216d0-202">(C#) **저장**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-202">(C#) Click **Save**.</span></span>
+   1. <span data-ttu-id="27833-202">(C#) **저장**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-202">(C#) Click **Save**.</span></span>
 
-1. <span data-ttu-id="216d0-203">포털에서 함수 앱으로 이동하고, **개요** 탭을 선택한 다음, **다시 시작**을 클릭하여 CORS에 대한 변경 내용이 적용되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-203">Still in the portal, navigate to the function app, select the **Overview** tab, and then click **Restart** to make sure that the changes for CORS take effect.</span></span>
+1. <span data-ttu-id="27833-203">포털에서 함수 앱으로 이동하고, **개요** 탭을 선택한 다음, **다시 시작**을 클릭하여 CORS에 대한 변경 내용이 적용되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-203">Still in the portal, navigate to the function app, select the **Overview** tab, and then click **Restart** to make sure that the changes for CORS take effect.</span></span>
 
-## <a name="configure-cors-in-the-storage-account"></a><span data-ttu-id="216d0-204">Storage 계정에서 CORS 구성</span><span class="sxs-lookup"><span data-stu-id="216d0-204">Configure CORS in the Storage account</span></span>
+## <a name="configure-cors-in-the-storage-account"></a><span data-ttu-id="27833-204">Storage 계정에서 CORS 구성</span><span class="sxs-lookup"><span data-stu-id="27833-204">Configure CORS in the Storage account</span></span>
 
-<span data-ttu-id="216d0-205">앱이 파일을 업로드하기 위해 Blob Storage에 대한 클라이언트 쪽 JavaScript를 호출하기 때문에 CORS에 대한 Storage 계정을 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-205">Because the app also makes client-side JavaScript calls to Blob Storage to upload files, you also have to configure the Storage account for CORS.</span></span>
+<span data-ttu-id="27833-205">앱이 파일을 업로드하기 위해 Blob Storage에 대한 클라이언트 쪽 JavaScript를 호출하기 때문에 CORS에 대한 Storage 계정을 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-205">Because the app also makes client-side JavaScript calls to Blob Storage to upload files, you also have to configure the Storage account for CORS.</span></span>
 
-1. <span data-ttu-id="216d0-206">다음 명령을 실행하여 모든 원본이 Storage 계정에 파일을 업로드하도록 허용합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-206">Run the following command to allow all origins to upload files to the Storage account.</span></span>
+1. <span data-ttu-id="27833-206">다음 명령을 실행하여 모든 원본이 Storage 계정에 파일을 업로드하도록 허용합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-206">Run the following command to allow all origins to upload files to the Storage account.</span></span>
 
     ```azurecli
     az storage cors add --methods OPTIONS PUT --origins '*' --exposed-headers '*' --allowed-headers '*' --services b --account-name <storage account name>
     ```
 
 
-## <a name="modify-the-web-app-to-upload-images"></a><span data-ttu-id="216d0-207">이미지를 업로드하도록 웹앱 수정</span><span class="sxs-lookup"><span data-stu-id="216d0-207">Modify the web app to upload images</span></span>
+## <a name="modify-the-web-app-to-upload-images"></a><span data-ttu-id="27833-207">이미지를 업로드하도록 웹앱 수정</span><span class="sxs-lookup"><span data-stu-id="27833-207">Modify the web app to upload images</span></span>
 
-<span data-ttu-id="216d0-208">웹앱은 **settings.js**라는 파일에서 설정을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-208">The web app retrieves settings from a file named **settings.js**.</span></span> <span data-ttu-id="216d0-209">다음 단계에서는 Cloud Shell을 사용하여 파일을 만든 다음, `window.apiBaseUrl`을 함수 앱의 URL로 설정하고, `window.blobBaseUrl`을 Azure Blob Storage 엔드포인트의 URL로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-209">In the following steps, you create the file using Cloud Shell, then set `window.apiBaseUrl` to the URL of the Function app and `window.blobBaseUrl` to the URL of the Azure Blob Storage endpoint.</span></span>
+<span data-ttu-id="27833-208">웹앱은 **settings.js**라는 파일에서 설정을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-208">The web app retrieves settings from a file named **settings.js**.</span></span> <span data-ttu-id="27833-209">다음 단계에서는 Cloud Shell을 사용하여 파일을 만든 다음, `window.apiBaseUrl`을 함수 앱의 URL로 설정하고, `window.blobBaseUrl`을 Azure Blob Storage 엔드포인트의 URL로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-209">In the following steps, you create the file using Cloud Shell, then set `window.apiBaseUrl` to the URL of the Function app and `window.blobBaseUrl` to the URL of the Azure Blob Storage endpoint.</span></span>
 
-1. <span data-ttu-id="216d0-210">Cloud Shell에서 현재 디렉터리가 **www/dist** 폴더인지를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-210">In the Cloud Shell, ensure that the current directory is the **www/dist** folder.</span></span>
+1. <span data-ttu-id="27833-210">Cloud Shell에서 현재 디렉터리가 **www/dist** 폴더인지를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-210">In the Cloud Shell, ensure that the current directory is the **www/dist** folder.</span></span>
 
     ```azurecli
     cd ~/functions-first-serverless-web-application/www/dist
     ```
 
-1. <span data-ttu-id="216d0-211">함수 앱의 URL을 쿼리하고 **FUNCTION_APP_URL**이라는 bash 변수에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-211">Query the function app's URL and store it in a bash variable named **FUNCTION_APP_URL**.</span></span>
+1. <span data-ttu-id="27833-211">함수 앱의 URL을 쿼리하고 **FUNCTION_APP_URL**이라는 bash 변수에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-211">Query the function app's URL and store it in a bash variable named **FUNCTION_APP_URL**.</span></span>
 
     ```azurecli
     export FUNCTION_APP_URL="https://"$(az functionapp show -n <function app name> -g first-serverless-app --query "defaultHostName" --output tsv)
     ```
 
-    <span data-ttu-id="216d0-212">변수가 올바르게 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-212">Confirm the variable is correctly set.</span></span>
+    <span data-ttu-id="27833-212">변수가 올바르게 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-212">Confirm the variable is correctly set.</span></span>
 
     ```azurecli
     echo $FUNCTION_APP_URL
     ```
 
-1. <span data-ttu-id="216d0-213">함수 앱에 대한 API 호출의 기본 URI를 설정하려면 **settings.js**를 만들고, 다음과 같은 함수 앱 URL을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-213">To set the base URI of API calls to your function app, create **settings.js** and add the function app URL like the following.</span></span>
+1. <span data-ttu-id="27833-213">함수 앱에 대한 API 호출의 기본 URI를 설정하려면 **settings.js**를 만들고, 다음과 같은 함수 앱 URL을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-213">To set the base URI of API calls to your function app, create **settings.js** and add the function app URL like the following.</span></span>
 
     `window.apiBaseUrl = 'https://fnapp@lab.GlobalLabInstanceId.azurewebsites.net'`
 
-    <span data-ttu-id="216d0-214">다음 명령을 실행하거나 VIM과 같은 명령줄 편집기를 사용하여 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-214">You can make the change by running the following command or by using a command-line editor like VIM.</span></span>
+    <span data-ttu-id="27833-214">다음 명령을 실행하거나 VIM과 같은 명령줄 편집기를 사용하여 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-214">You can make the change by running the following command or by using a command-line editor like VIM.</span></span>
 
     ```azurecli
     echo "window.apiBaseUrl = '$FUNCTION_APP_URL'" > settings.js
     ```
 
-    <span data-ttu-id="216d0-215">파일을 성공적으로 작성했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-215">Confirm the file was successfully written.</span></span>
+    <span data-ttu-id="27833-215">파일을 성공적으로 작성했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-215">Confirm the file was successfully written.</span></span>
 
     ```azurecli
     cat settings.js
     ```
 
-1. <span data-ttu-id="216d0-216">기본 Blob Storage 기본 URL을 쿼리하고 **BLOB_BASE_URL**이라는 bash 변수에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-216">Query the Blob Storage base URL and store it in a bash variable named **BLOB_BASE_URL**.</span></span>
+1. <span data-ttu-id="27833-216">기본 Blob Storage 기본 URL을 쿼리하고 **BLOB_BASE_URL**이라는 bash 변수에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-216">Query the Blob Storage base URL and store it in a bash variable named **BLOB_BASE_URL**.</span></span>
 
     ```azurecli
     export BLOB_BASE_URL=$(az storage account show -n <storage account name> -g first-serverless-app --query primaryEndpoints.blob -o tsv | sed 's/\/$//')
     ```
 
-    <span data-ttu-id="216d0-217">변수가 올바르게 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-217">Confirm the variable is correctly set.</span></span>
+    <span data-ttu-id="27833-217">변수가 올바르게 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-217">Confirm the variable is correctly set.</span></span>
 
     ```azurecli
     echo $BLOB_BASE_URL
     ```
 
-1. <span data-ttu-id="216d0-218">함수 앱에 대한 API 호출의 기본 URI를 설정하려면 다음 코드 줄과 같은 저장소 URL을 **settings.js**에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-218">To set the base URI of API calls to your function app, append the storage URL like the following line of code to **settings.js**.</span></span>
+1. <span data-ttu-id="27833-218">함수 앱에 대한 API 호출의 기본 URI를 설정하려면 다음 코드 줄과 같은 저장소 URL을 **settings.js**에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-218">To set the base URI of API calls to your function app, append the storage URL like the following line of code to **settings.js**.</span></span>
 
     `window.blobBaseUrl = 'https://mystorage.blob.core.windows.net'`
 
-    <span data-ttu-id="216d0-219">다음 명령을 실행하거나 VIM과 같은 명령줄 편집기를 사용하여 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-219">You can make the change by running the following command or by using a command-line editor like VIM.</span></span>
+    <span data-ttu-id="27833-219">다음 명령을 실행하거나 VIM과 같은 명령줄 편집기를 사용하여 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-219">You can make the change by running the following command or by using a command-line editor like VIM.</span></span>
 
     ```azurecli
     echo "window.blobBaseUrl = '$BLOB_BASE_URL'" >> settings.js
     ```
 
-    <span data-ttu-id="216d0-220">이제 파일이 성공적으로 작성되고 2개의 줄을 포함하는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-220">Confirm the file was successfully written and it now contains 2 lines.</span></span>
+    <span data-ttu-id="27833-220">이제 파일이 성공적으로 작성되고 2개의 줄을 포함하는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-220">Confirm the file was successfully written and it now contains 2 lines.</span></span>
 
     ```azurecli
     cat settings.js
     ```
 
-1. <span data-ttu-id="216d0-221">Blob Storage에 파일을 업로드합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-221">Upload the file to Blob storage.</span></span>
+1. <span data-ttu-id="27833-221">Blob Storage에 파일을 업로드합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-221">Upload the file to Blob storage.</span></span>
 
     ```azurecli
     az storage blob upload -c \$web --account-name <storage account name> -f settings.js -n settings.js
     ```
 
 
-## <a name="test-the-web-application"></a><span data-ttu-id="216d0-222">웹 응용 프로그램 테스트</span><span class="sxs-lookup"><span data-stu-id="216d0-222">Test the web application</span></span>
+## <a name="test-the-web-application"></a><span data-ttu-id="27833-222">웹 응용 프로그램 테스트</span><span class="sxs-lookup"><span data-stu-id="27833-222">Test the web application</span></span>
 
-<span data-ttu-id="216d0-223">이 시점에서 갤러리 응용 프로그램은 이미지를 Blob Storage에 업로드할 수 있지만 아직 이미지를 표시할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-223">At this point, the gallery application is able to upload an image to Blob storage, but it can't display images yet.</span></span> <span data-ttu-id="216d0-224">이후 모듈에서 만들 수 있으므로 아직 존재하지 않는 `GetImages` 함수를 호출하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-224">It will try to call a `GetImages` function that doesn't exist yet because you create it in a later module.</span></span> <span data-ttu-id="216d0-225">해당 호출에 실패하고 웹 페이지가 "분석 중..." 상태에서 중단된 것으로 표시되지만 선택한 이미지는 성공적으로 업로드됩니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-225">That call will fail, and the web page will appear to be stuck on "Analyzing...", but the image you select will be successfully uploaded.</span></span>
+<span data-ttu-id="27833-223">이 시점에서 갤러리 응용 프로그램은 이미지를 Blob Storage에 업로드할 수 있지만 아직 이미지를 표시할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-223">At this point, the gallery application is able to upload an image to Blob storage, but it can't display images yet.</span></span> <span data-ttu-id="27833-224">이후 모듈에서 만들 수 있으므로 아직 존재하지 않는 `GetImages` 함수를 호출하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-224">It will try to call a `GetImages` function that doesn't exist yet because you create it in a later module.</span></span> <span data-ttu-id="27833-225">해당 호출에 실패하고 웹 페이지가 "분석 중..." 상태에서 중단된 것으로 표시되지만 선택한 이미지는 성공적으로 업로드됩니다.</span><span class="sxs-lookup"><span data-stu-id="27833-225">That call will fail, and the web page will appear to be stuck on "Analyzing...", but the image you select will be successfully uploaded.</span></span>
 
-<span data-ttu-id="216d0-226">Azure Portal에서 **images** 컨테이너의 콘텐츠를 확인하여 이미지가 성공적으로 업로드되었는지 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-226">You can verify an image is successfully uploaded by checking the contents of the **images** container in the Azure portal.</span></span>
+<span data-ttu-id="27833-226">Azure Portal에서 **images** 컨테이너의 콘텐츠를 확인하여 이미지가 성공적으로 업로드되었는지 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-226">You can verify an image is successfully uploaded by checking the contents of the **images** container in the Azure portal.</span></span>
 
-1. <span data-ttu-id="216d0-227">브라우저 창에서 응용 프로그램을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-227">In a browser window, browse to the application.</span></span> <span data-ttu-id="216d0-228">이미지 파일을 선택하고 업로드합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-228">Select an image file and upload it.</span></span> <span data-ttu-id="216d0-229">업로드가 완료되지만 아직 이미지를 표시하는 기능을 추가하지 않았으므로 앱은 업로드한 사진을 표시하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-229">The upload completes, but because we haven't added the ability to display images yet, the app doesn't show the uploaded photo.</span></span> <span data-ttu-id="216d0-230">(웹 페이지가 "이미지 분석 중..."에서 중단된 것으로 표시됩니다. 나중에 수정합니다.)</span><span class="sxs-lookup"><span data-stu-id="216d0-230">(The web page appears to be stuck on "Analyzing image..."; you'll fix that later.)</span></span>
+1. <span data-ttu-id="27833-227">브라우저 창에서 응용 프로그램을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-227">In a browser window, browse to the application.</span></span> <span data-ttu-id="27833-228">이미지 파일을 선택하고 업로드합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-228">Select an image file and upload it.</span></span> <span data-ttu-id="27833-229">업로드가 완료되지만 아직 이미지를 표시하는 기능을 추가하지 않았으므로 앱은 업로드한 사진을 표시하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-229">The upload completes, but because we haven't added the ability to display images yet, the app doesn't show the uploaded photo.</span></span> <span data-ttu-id="27833-230">(웹 페이지가 "이미지 분석 중..."에서 중단된 것으로 표시됩니다. 나중에 수정합니다.)</span><span class="sxs-lookup"><span data-stu-id="27833-230">(The web page appears to be stuck on "Analyzing image..."; you'll fix that later.)</span></span>
 
-1. <span data-ttu-id="216d0-231">Cloud Shell에서 이미지를 **images** 컨테이너로 업로드했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-231">In the Cloud Shell, confirm the image was uploaded to the **images** container.</span></span>
+1. <span data-ttu-id="27833-231">Cloud Shell에서 이미지를 **images** 컨테이너로 업로드했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-231">In the Cloud Shell, confirm the image was uploaded to the **images** container.</span></span>
 
     ```azurecli
     az storage blob list --account-name <storage account name> -c images -o table
     ```
 
-1. <span data-ttu-id="216d0-232">다음 자습서로 넘어가기 전에 **images** 컨테이너에서 모든 파일을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-232">Before moving on to the next tutorial, delete all files in the **images** container.</span></span>
+1. <span data-ttu-id="27833-232">다음 자습서로 넘어가기 전에 **images** 컨테이너에서 모든 파일을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="27833-232">Before moving on to the next tutorial, delete all files in the **images** container.</span></span>
 
     ```azurecli
     az storage blob delete-batch -s images --account-name <storage account name>
     ```
 
 
-## <a name="summary"></a><span data-ttu-id="216d0-233">요약</span><span class="sxs-lookup"><span data-stu-id="216d0-233">Summary</span></span>
+## <a name="summary"></a><span data-ttu-id="27833-233">요약</span><span class="sxs-lookup"><span data-stu-id="27833-233">Summary</span></span>
 
-<span data-ttu-id="216d0-234">이 모듈에서는 Azure 함수 앱을 만들고 서버를 사용하지 않는 함수를 사용하여 웹 응용 프로그램이 Blob Storage에 이미지를 업로드하도록 하는 방법을 알아보았습니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-234">In this module, you created an Azure Function app and learned how to use a serverless function to allow a web application to upload images to Blob storage.</span></span> <span data-ttu-id="216d0-235">다음으로, Blob 트리거 서버를 사용하지 않는 함수를 사용하여 업로드된 이미지에 대한 썸네일을 만드는 방법을 알아봅니다.</span><span class="sxs-lookup"><span data-stu-id="216d0-235">Next, you learn how to create thumbnails for the uploaded images using a Blob triggered serverless function.</span></span>
+<span data-ttu-id="27833-234">이 모듈에서는 Azure 함수 앱을 만들고 서버를 사용하지 않는 함수를 사용하여 웹 응용 프로그램이 Blob Storage에 이미지를 업로드하도록 하는 방법을 알아보았습니다.</span><span class="sxs-lookup"><span data-stu-id="27833-234">In this module, you created an Azure Function app and learned how to use a serverless function to allow a web application to upload images to Blob storage.</span></span> <span data-ttu-id="27833-235">다음으로, Blob 트리거 서버를 사용하지 않는 함수를 사용하여 업로드된 이미지에 대한 썸네일을 만드는 방법을 알아봅니다.</span><span class="sxs-lookup"><span data-stu-id="27833-235">Next, you learn how to create thumbnails for the uploaded images using a Blob triggered serverless function.</span></span>
