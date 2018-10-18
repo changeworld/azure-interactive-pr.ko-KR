@@ -6,15 +6,15 @@ author: ggailey777
 manager: jeconnoc
 ms.service: multiple
 ms.topic: include
-ms.date: 06/21/2018
+ms.date: 10/12/2018
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 51c7d3e64424d499b473f3b138ce249a9cfd0182
-ms.sourcegitcommit: 81587470a181e314242c7a97cd0f91c82d4fe232
+ms.openlocfilehash: 3779c2e130afa7ee8d5879f30a924e258b7a41e9
+ms.sourcegitcommit: fdb43556b8dcf67cb39c18e532b5fab7ac53eaee
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/01/2018
-ms.locfileid: "47460090"
+ms.lasthandoff: 10/15/2018
+ms.locfileid: "49315979"
 ---
 빌드 중인 응용 프로그램은 사진 갤러리입니다. API를 호출하는 클라이언트 쪽 JavaScript를 사용하여 이미지를 업로드하고 표시합니다. 이 모듈에서 이미지를 업로드하려면 시간이 제한된 URL을 생성하는 서버를 사용하지 않는 함수를 사용하여 API를 만듭니다. 웹 응용 프로그램은 [Blob Storage REST API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)를 사용하여 Blob Storage에 이미지를 업로드하기 위해 생성된 URL을 사용합니다.
 
@@ -44,12 +44,12 @@ az functionapp create -n <function app name> -g first-serverless-app -s <storage
 
 ## <a name="configure-the-function-app"></a>함수 앱 구성
 
-이 자습서의 함수 앱에는 Functions 런타임의 버전 1.x가 필요합니다. `FUNCTIONS_WORKER_RUNTIME` 응용 프로그램 설정을 `~1`로 설정하면 함수 앱이 최신 1.x 버전에 고정됩니다. [az functionapp config appsettings set](https://docs.microsoft.com/cli/azure/functionapp/config/appsettings#set) 명령을 사용하여 응용 프로그램 설정을 설정합니다.
+이 자습서의 함수 앱에는 Functions 런타임의 버전 1.x가 필요합니다. `FUNCTIONS_EXTENSION_VERSION` 응용 프로그램 설정을 `~1`로 설정하면 함수 앱이 최신 1.x 버전에 고정됩니다. [az functionapp config appsettings set](https://docs.microsoft.com/cli/azure/functionapp/config/appsettings#set) 명령을 사용하여 응용 프로그램 설정을 설정합니다.
 
 다음 Azure CLI 명령에서 `<app_name>은 함수 앱의 이름입니다.
 
 ```azurecli
-az functionapp config appsettings set --name <function app name> --g first-serverless-app --settings FUNCTIONS_WORKER_RUNTIME=~1
+az functionapp config appsettings set --name <function app name> --g first-serverless-app --settings FUNCTIONS_EXTENSION_VERSION=~1
 ```
 
 ## <a name="create-an-http-triggered-serverless-function"></a>HTTP 트리거 서버를 사용하지 않는 함수 만들기
