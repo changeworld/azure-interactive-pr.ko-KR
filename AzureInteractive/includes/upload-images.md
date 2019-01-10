@@ -49,7 +49,7 @@ az functionapp create -n <function app name> -g first-serverless-app -s <storage
 다음 Azure CLI 명령에서 `<app_name>은 함수 앱의 이름입니다.
 
 ```azurecli
-az functionapp config appsettings set --name <function app name> --g first-serverless-app --settings FUNCTIONS_EXTENSION_VERSION=~1
+az functionapp config appsettings set --name <function app name> -g first-serverless-app --settings FUNCTIONS_EXTENSION_VERSION=~1
 ```
 
 ## <a name="create-an-http-triggered-serverless-function"></a>HTTP 트리거 서버를 사용하지 않는 함수 만들기
